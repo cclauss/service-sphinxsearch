@@ -12,6 +12,7 @@ source src_swisssearch : def_pqsql
     sql_attr_float = y
     sql_attr_float = lat
     sql_attr_float = lon
+    sql_field_string = objektart
     sql_field_string = detail
     sql_field_string = geom_quadindex
 }
@@ -33,6 +34,7 @@ source src_address : src_swisssearch
         , st_y(st_transform(the_geom,4326)) as lat \
         , st_x(st_transform(the_geom,4326)) as lon \
         , num \
+	, '' as objektart \
         FROM bfs.adressen_sphinx
 }
 
@@ -53,6 +55,7 @@ source src_parcel : src_swisssearch
         , st_y(st_transform(st_centroid(the_geom),4326)) as lat \
         , st_x(st_transform(st_centroid(the_geom),4326)) as lon \
         , num \
+	, '' as objektart \
         from kantone.parzellen_sphinx
 }
 
@@ -181,6 +184,7 @@ source src_gg25 : src_swisssearch
         , st_y(st_transform(ST_PointOnSurface(g.the_geom),4326)) as lat \
         , st_x(st_transform(ST_PointOnSurface(g.the_geom),4326)) as lon \
         , 1 as num \
+	, '' as objektart \
         FROM tlm.swissboundaries_gemeinden_uebersetzt g left join tlm.swissboundaries_kantone k on k.kantonsnr = g.kantonsnr 
 }
 
@@ -202,6 +206,7 @@ source src_kantone : src_swisssearch
         , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
         , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
         , 1 as num \
+	, '' as objektart \
          FROM tlm.swissboundaries_kantone
 }
 
@@ -224,6 +229,7 @@ source src_district : src_swisssearch
         , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
         , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
         , 1 as num \
+	, '' as objektart \
         FROM tlm.swissboundaries_bezirke 
 }
 
@@ -245,6 +251,7 @@ source src_zipcode : src_swisssearch
         , st_y(st_transform(ST_PointOnSurface(the_geom),4326)) as lat \
         , st_x(st_transform(ST_PointOnSurface(the_geom),4326)) as lon \
         , 1 as num \
+	, '' as objektart \
         FROM vd.gabmo_plz p
 }
 
@@ -266,6 +273,7 @@ source src_haltestellen : src_swisssearch
         , st_y(st_transform(st_geometryn(the_geom,1),4326)) as lat \
         , st_x(st_transform(st_geometryn(the_geom,1),4326)) as lon \
         , 1 as num \
+	, '' as objektart \
         FROM bav.oev_haltestellen 
 }
 
