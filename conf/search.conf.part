@@ -288,7 +288,7 @@ index zipcode
     docinfo = extern
     charset_type = utf-8
     min_infix_len = 1
-    infix_fields = detail,geom_quadindex
+    infix_fields = detail,geom_quadindex,objektart
     enable_star = 1
     ondisk_dict = 0
     preopen = 1
